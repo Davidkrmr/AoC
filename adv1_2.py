@@ -4,17 +4,12 @@ import unittest
 def calc(captcha):
     inlist = list(str(captcha))
     result = 0
-    match = len(inlist) / 2
+    offset = len(inlist) / 2
 
     for i, c in enumerate(inlist):
-        if (i + match) < len(inlist):
-            if c == inlist[i + match]:
-                result += int(c)
-        else:
-            overflow = (i + match) - len(inlist)
-            if c == inlist[overflow]:
-                result += int(c)
-
+        if c == inlist[(i + offset) % len(inlist)]:
+            result += int(c)
+            
     return result
 
 
@@ -37,3 +32,4 @@ class Test(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
