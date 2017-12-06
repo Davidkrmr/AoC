@@ -1,15 +1,16 @@
 
 import unittest
 
+
 def calc(captcha):
     inlist = list(str(captcha))
     result = 0
     offset = len(inlist) / 2
 
-    for i, c in enumerate(inlist):
-        if c == inlist[(i + offset) % len(inlist)]:
-            result += int(c)
-            
+    for i, num in enumerate(inlist):
+        if num == inlist[(i + offset) % len(inlist)]:
+            result += int(num)
+
     return result
 
 
@@ -30,6 +31,6 @@ class Test(unittest.TestCase):
     def test_captcha_123123(self):
         self.assertEqual(calc(12131415), 4)
 
+
 if __name__ == '__main__':
     unittest.main()
-

@@ -1,10 +1,12 @@
 import unittest
 
+
 def num_instructions(s):
     l = prep(s)
-    return walk(l)
+    return jump(l)
 
-def walk(l):
+
+def jump(l):
     index = 0
     num_steps = 0
 
@@ -16,12 +18,13 @@ def walk(l):
 
     return num_steps
 
+
 def prep(s):
     return [int(s) for s in s.split('\n')]
 
 
 class Test(unittest.TestCase):
-    
+
     def test_prep(self):
         data = "0\n3\n0\n1\n-3"
 
@@ -30,6 +33,7 @@ class Test(unittest.TestCase):
     def test_num_instructions(self):
         data = "0\n3\n0\n1\n-3"
         self.assertEquals(num_instructions(data), 5)
+
 
 if __name__ == '__main__':
     unittest.main()
