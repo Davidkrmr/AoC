@@ -12,7 +12,6 @@ def redistribute(l):
 
     return list(l)
 
-
 def run(l):
     prev_state = []
     redistributed = list(l)
@@ -24,7 +23,17 @@ def run(l):
         redistributed = redistribute(redistributed)
         cycles += 1
 
+    prev_state = []
+    cycles = 0
+
+    while redistributed not in prev_state:
+        print redistributed
+        prev_state.append(list(redistributed))
+        redistributed = redistribute(redistributed)
+        cycles += 1
+
     return cycles
+
 
 def prep(s):
     return [int(s) for s in s.split('\t')]
@@ -48,10 +57,11 @@ class Test(unittest.TestCase):
         result = redistribute(result)
         self.assertEquals(result, [2, 4, 1, 2])
 
-    def test_run(self):
+    def test_run_loop_size(self):
         data = [0, 2, 7, 0]
-        self.assertEquals(run(data), 5)
+        self.assertEquals(run(data), 4)
 
 
 if __name__ == '__main__':
     unittest.main()
+    #print run(prep(input))
