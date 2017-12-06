@@ -1,6 +1,5 @@
 import unittest
 
-
 def redistribute(l):
     sel = max(l)
     sel_index = l.index(sel)
@@ -15,24 +14,24 @@ def redistribute(l):
 
 
 def run(l):
+    result_one = loop(l)
+    redistributed = result_one[0]
+    result_two = loop(redistributed)
+
+    return result_two[1]
+
+
+def loop(l):
+    cycles = 0
     prev_state = []
     redistributed = list(l)
-    cycles = 0
 
     while redistributed not in prev_state:
         prev_state.append(list(redistributed))
         redistributed = redistribute(redistributed)
         cycles += 1
 
-    prev_state = []
-    cycles = 0
-
-    while redistributed not in prev_state:
-        prev_state.append(list(redistributed))
-        redistributed = redistribute(redistributed)
-        cycles += 1
-
-    return cycles
+    return (redistributed, cycles)
 
 
 def prep(s):
